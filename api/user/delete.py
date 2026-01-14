@@ -4,9 +4,8 @@ from flask import request, Response
 from flask_restx import Resource
 
 from controller.user_controller import UsersController
-from resources.authentication import auth
 from util.logging_format import LoggingFormat
-from util.utils import VerifyData
+from controller.validate_data_controller import VerifyData
 
 
 class UserApiDelete(Resource):

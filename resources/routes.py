@@ -1,3 +1,4 @@
+from api.service.status_api import StatusApi
 from api.user.get import UserApiGet
 from api.user.post import UserApiPost
 from api.user.put import UserApiPut
@@ -23,3 +24,4 @@ def initialize_routes(api):
     api.add_resource(VersionApiPut, f'/api/version')
 
     api.add_resource(UserLoginApi, '/api/login')
+    api.add_resource(StatusApi, '/api/status')

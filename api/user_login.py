@@ -1,3 +1,5 @@
+from time import sleep
+
 from flask import request
 from flask_restx import Resource
 
@@ -9,4 +11,4 @@ class UserLoginApi(Resource):
     @staticmethod
     def post():
         dados = request.get_json(silent=True)
-        return UserLogin.login(dados['email'], dados['password'])
+        return UserLogin().login(dados['email'], dados['password'])

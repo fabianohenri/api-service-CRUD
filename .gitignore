@@ -1,1 +1,5 @@
+## Folder ignored
 /src/
+
+## Files ignored
+.env

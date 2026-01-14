@@ -4,15 +4,14 @@ from hmac import compare_digest as compare_hash
 import cryptocode
 from flask import request, Response
 
+from controller.variables_db import VariablesDataBase
 from models.person_model import PersonModel
-from util.config import KEY_HASH
 from util.logging_format import LoggingFormat
 
 
-class UserLogin:
+class UserLogin(VariablesDataBase):
 
-    @staticmethod
-    def login(recive_email, recive_password):
+    def login(self, recive_email, recive_password):
         # pesquisa o usuário
         try:
             message = f"Tentativa de login com o email: {recive_email}"
@@ -38,7 +37,7 @@ class UserLogin:
             return Response(json.dumps(response), status=404, mimetype="application/json")
 
         # Desincripotografa o password salvo no banco.
-        save_pass = cryptocode.decrypt(data.password, KEY_HASH)
+        save_pass = cryptocode.decrypt(data.password, self.vars_db()["KEY_HASH"])
 
         # Compara os valores informados com o coletado no banco
         valid = compare_hash(save_pass, recive_password)

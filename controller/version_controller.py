@@ -6,7 +6,7 @@ from sqlalchemy.exc import OperationalError
 from models.version_model import VersionModel
 from util.config import db
 from util.logging_format import LoggingFormat
-from util.utils import VerifyData
+from controller.validate_data_controller import VerifyData
 
 
 class VersionController:

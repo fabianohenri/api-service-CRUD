@@ -5,12 +5,13 @@ from flask import request, Response
 from sqlalchemy import exc
 from sqlalchemy.exc import OperationalError
 
+from controller.variables_db import VariablesDataBase
 from models.person_model import PersonModel
-from util.config import db, KEY_HASH
+from util.config import db
 from util.logging_format import LoggingFormat
 
 
-class UsersController:
+class UsersController(VariablesDataBase):
     def __init__(self):
         self.__dados = request.get_json(silent=True)
 
@@ -97,7 +98,8 @@ class UsersController:
     def post_users(self):
         # Verificar se existe o parâmetro name no json
         try:
-            password = cryptocode.encrypt(self.__dados['password'], KEY_HASH)
+            vars = self.vars_db()
+            password = cryptocode.encrypt(self.__dados['password'], vars["KEY_HASH"])
             new_user = PersonModel(name=self.__dados['name'],
                                    email=self.__dados['email'],
                                    password=password)
